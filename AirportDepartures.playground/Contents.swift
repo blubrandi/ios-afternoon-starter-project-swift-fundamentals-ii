@@ -37,6 +37,7 @@ let abq = Airport(name: "Albuquerque Sunport", city: "Albuquerque", airportCode:
 
 struct Flight {
     let origin: String
+    let destination: String
     let date: Date?
     let terminal: String?
     let status: FlightStatus
@@ -68,16 +69,16 @@ class DepartureBoard {
 //:
 //: e. Stretch: Look at the API for [`DateComponents`](https://developer.apple.com/documentation/foundation/datecomponents?language=objc) for creating a specific time
 
-let flight1 = Flight(origin: "Phoenix", date: Date(), terminal: "4a", status: .scheduled)
-let flight2 = Flight(origin: "Ft Lauderdale", date: Date(), terminal: nil, status: .enRouteOnTime)
-let flight3 = Flight(origin: "Dayton", date: nil, terminal: "3b", status: .canceled)
+let flight1 = Flight(origin: "Phoenix", destination: "Chicago", date: Date(), terminal: "4a", status: .scheduled)
+let flight2 = Flight(origin: "Ft Lauderdale", destination: "Springfield", date: Date(), terminal: nil, status: .enRouteOnTime)
+let flight3 = Flight(origin: "Dayton", destination: "Albuquerque", date: nil, terminal: "3b", status: .canceled)
 
 let flights: [Flight] = [flight1, flight2, flight3]
 //print(flights)
 
 let departureBoard1 = DepartureBoard(currentAirport: abq, flights: flights)
 
-let flight4 = Flight(origin: "Los Angeles", date: Date(), terminal: "5", status: .landed)
+let flight4 = Flight(origin: "Los Angeles", destination: "Portland", date: Date(), terminal: "5", status: .landed)
 
 departureBoard1.add(flight: flight4)
 
@@ -93,7 +94,7 @@ print(departureBoard1.flights)
 func printDepartures(departureBoard: DepartureBoard) {
     
     for flight in departureBoard.flights {
-        print("Flight From: \(flight.origin) is \(flight.status.rawValue) and will arrive at \(flight.terminal)")
+        print("Flight To: \(flight.destination) is \(flight.status.rawValue) and will arrive at \(flight.terminal)")
     }
 }
 
@@ -114,6 +115,21 @@ printDepartures(departureBoard: departureBoard1)
 //:     Destination: Los Angeles Airline: Delta Air Lines Flight: KL 6966 Departure Time:  Terminal: 4 Status: Canceled
 //:     Destination: Rochester Airline: Jet Blue Airways Flight: B6 586 Departure Time: 1:26 PM Terminal:  Status: Scheduled
 //:     Destination: Boston Airline: KLM Flight: KL 6966 Departure Time: 1:26 PM Terminal: 4 Status: Scheduled
+
+func printDepartures2(departureBoard: DepartureBoard) {
+    
+    for flight in departureBoard.flights {
+        
+        if let date = flight.date {
+            let dateString = "\(date)"
+            print("Flight To: \(flight.destination) is \(flight.status.rawValue) and will depart at \(dateString)")
+        } else {
+            print("Flight To: \(flight.destination) is \(flight.status.rawValue).")
+        }
+    }
+}
+
+printDepartures2(departureBoard: departureBoard1)
 
 
 
