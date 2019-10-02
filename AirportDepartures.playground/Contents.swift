@@ -35,7 +35,10 @@ struct Airport {
 
 let abq = Airport(name: "Albuquerque Sunport", city: "Albuquerque", airportCode: "ABQ")
 
+let currentDate = Date()
+
 struct Flight {
+       
     let origin: String
     let destination: String
     let date: Date?
@@ -44,6 +47,7 @@ struct Flight {
 }
 
 class DepartureBoard {
+    
     var currentAirport: Airport
     var flights: [Flight] = []
     
@@ -100,7 +104,6 @@ func printDepartures(departureBoard: DepartureBoard) {
 
 printDepartures(departureBoard: departureBoard1)
 
-
 //: ## 4. Make a second function to print print an empty string if the `departureTime` is nil
 //: a. Createa new `printDepartures2(departureBoard:)` or modify the previous function
 //:
@@ -115,6 +118,7 @@ printDepartures(departureBoard: departureBoard1)
 //:     Destination: Los Angeles Airline: Delta Air Lines Flight: KL 6966 Departure Time:  Terminal: 4 Status: Canceled
 //:     Destination: Rochester Airline: Jet Blue Airways Flight: B6 586 Departure Time: 1:26 PM Terminal:  Status: Scheduled
 //:     Destination: Boston Airline: KLM Flight: KL 6966 Departure Time: 1:26 PM Terminal: 4 Status: Scheduled
+
 
 func printDepartures2(departureBoard: DepartureBoard) {
     
@@ -148,6 +152,24 @@ printDepartures2(departureBoard: departureBoard1)
 //:
 //: f. Stretch: Display a custom message if the `terminal` is `nil`, tell the traveler to see the nearest information desk for more details.
 
+//class DepartureBoard {
+//    var currentAirport: Airport
+//    var flights: [Flight] = []
+//
+//    init(currentAirport: Airport, flights: [Flight]) {
+//        self.currentAirport = currentAirport
+//        self.flights = flights
+//    }
+//
+//    func add(flight: Flight) {
+//        flights.append(flight)
+//    }
+//
+//    func alert(flight: Flight) {
+//
+//    }
+//}
+
 
 
 
@@ -168,6 +190,18 @@ printDepartures2(departureBoard: departureBoard1)
 //: e. Make sure to cast the numbers to the appropriate types so you calculate the correct airfare
 //:
 //: f. Stretch: Use a [`NumberFormatter`](https://developer.apple.com/documentation/foundation/numberformatter) with the `currencyStyle` to format the amount in US dollars.
+func calculateAirfare(checkedBags: Int, distance: Int, travelers: Int) -> Double {
+    
+    let bags:Int = checkedBags * 25
+    let miles:Double = Double(distance) * 0.10
+    let airfare:Double = Double(bags) + miles
+    let totalAirFare:Double = Double(airfare) * Double(travelers)
+    
+    return totalAirFare
+    
+}
+
+print(calculateAirfare(checkedBags: 2, distance: 2000, travelers: 3))
 
 
 
